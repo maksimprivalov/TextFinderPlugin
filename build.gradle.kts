@@ -20,6 +20,11 @@ intellij {
   plugins.set(listOf(/* Plugin Dependencies */))
 }
 
+dependencies {
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.9.0")
+}
+
 tasks {
   // Set the JVM compatibility versions
   withType<JavaCompile> {
@@ -43,5 +48,7 @@ tasks {
 
   publishPlugin {
     token.set(System.getenv("PUBLISH_TOKEN"))
+  }
+  runIde {
   }
 }
