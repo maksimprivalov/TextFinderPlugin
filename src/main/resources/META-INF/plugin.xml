@@ -25,6 +25,9 @@
   <!-- Extension points defined by the plugin.
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
   <extensions defaultExtensionNs="com.intellij">
-
+    <toolWindow
+            id="Text Finder"
+            anchor="bottom"
+            factoryClass="com.github.maksimprivalov.textfinderplugin.textfinder.TextFinderToolWindowFactory"/>
   </extensions>
 </idea-plugin>
