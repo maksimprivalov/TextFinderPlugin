@@ -9,6 +9,7 @@ class TextFinderToolWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val panel = TextFinderPanel()
         val content = ContentFactory.getInstance().createContent(panel, "", false)
+        // Add the panel to the tool window in Content format
         toolWindow.contentManager.addContent(content)
     }
 }

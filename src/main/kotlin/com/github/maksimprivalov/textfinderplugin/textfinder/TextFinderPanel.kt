@@ -21,9 +21,9 @@ class TextFinderPanel : JPanel(BorderLayout()) {
         isEditable = false
     }
 
-    private var searchJob: Job? = null
+    private var searchJob: Job? = null // store the search coroutine job
     private val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
-
+    // configuration of the panel UI
     init {
         val inputPanel = JPanel().apply {
             layout = BoxLayout(this, BoxLayout.Y_AXIS)
@@ -53,10 +53,10 @@ class TextFinderPanel : JPanel(BorderLayout()) {
 
         val dir = directoryField.text.trim()
         val query = searchField.text.trim()
-        searchJob = scope.launch(Dispatchers.IO) {
+        searchJob = scope.launch(Dispatchers.IO) { // launch the search in IO dispatcher
             try {
                 searchForTextOccurrences(query, Path(dir)).collect { occ ->
-                    withContext(Dispatchers.Swing) {
+                    withContext(Dispatchers.Swing) { // switch to Swing dispatcher to update UI
                         resultArea.append("${occ.file.fileName}: ${occ.line}:${occ.offset}\n")
                     }
                 }
@@ -74,7 +74,7 @@ class TextFinderPanel : JPanel(BorderLayout()) {
     }
 
     private fun onCancelClicked(e: ActionEvent) {
-        searchJob?.cancel()
+        searchJob?.cancel() // stop the search coroutine
         resultArea.append("Search canceled.\n")
         startButton.isEnabled = true
         cancelButton.isEnabled = false
